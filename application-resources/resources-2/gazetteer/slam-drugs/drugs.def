@@ -1,0 +1,5 @@
+BNF_generic.lst:drug:BNF_generic
+BNF_trade.lst:drug:BNF_trade
+GATE_gazetteer.lst:drug:GATE_gazetteer
+Rashmi_depot.lst:drug:Rashmi_depot
+Wrong_spelling.lst:drug:Wrong_spelling

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<metadata xmlns="http://gate.ac.uk/ns/pipeline-metadata">
+  <pipeline-name>Pharmacotherapy GATE application used by the BRC on CRIS text</pipeline-name>
+  <slug>brc-gate-pharmacotherapy</slug>
+  <ordering>10</ordering>
+  <annotation-selectors>Output:Prescription</annotation-selectors>
+  <tags>
+    <tag>English</tag>
+    <tag>Named Entity</tag>
+  </tags>
+</metadata>

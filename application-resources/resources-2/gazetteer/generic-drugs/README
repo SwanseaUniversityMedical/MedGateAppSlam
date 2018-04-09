@@ -1,0 +1,10 @@
+These gazetteers were created from
+http://www.nelm.nhs.uk/en/Medicines-A-Z/Browse/?Letter=~
+
+original.lst: 2324 entries
+The full list of drugs without any editing
+
+simplified.lst: 1991 entreis
+Some entries in the original list were actually combinations of multiple drugs
+separated by a +. This list was created by splitting those entries and then
+retaining only the unique items.

@@ -1,0 +1,83 @@
+Phase: DrugStatus
+Input:Drug Measurement Keyword DoseFrequency Token
+Options: control=appelt
+
+/*
+ * This rule will allow irrelevant (i.e. historic or relating to other people)
+ * references to olanzapine to be ignored. This rule doesn't allow for a relevant
+ * reference to appear in a sentence with an irrelevant reference, is this okay? 
+ */
+/*
+Rule: notAPrescription
+Priority: 100
+(
+	{Keyword.kind == "irrelevant"}
+	(
+		(({Measurement}({DoseFrequency})?)|{Keyword.kind == "prescription_change"})*
+		({Token.string == "of"})?
+		{Drug}
+		({Measurement})*
+		({DoseFrequency})?
+	)+
+):match
+-->
+:match.NotAPrescription = { rule = notAPrescription }
+*/
+
+
+Rule: doseMatch1
+({Measurement.dimension!=time})*
+(
+	{Drug}
+	{Measurement.dimension!=time}
+	({DoseFrequency})?
+):match
+-->
+:match.Prescription = { rule = doseMatch1, drug = :match.Drug.name, dose = :match.Measurement@string, dose-value = :match.Measurement.value, dose-unit = :match.Measurement.unit, route = :match.Drug.route, frequency = :match.DoseFrequency.frequency, time-unit = :match.DoseFrequency.time-unit, interval = :match.DoseFrequency.interval, when = :match.DoseFrequency.when, drug-type = :match.Drug.type }
+
+
+Rule:doseMatch2
+(
+	{Measurement.dimension!=time}
+	({Token.string == "of"})?
+	{Drug}
+	({DoseFrequency})?
+):match
+-->
+:match.Prescription = { rule = doseMatch2, drug = :match.Drug.name, dose = :match.Measurement@string, dose-value = :match.Measurement.value, dose-unit = :match.Measurement.unit, route = :match.Drug.route, frequency = :match.DoseFrequency.frequency, time-unit = :match.DoseFrequency.time-unit, interval = :match.DoseFrequency.interval, when = :match.DoseFrequency.when, drug-type = :match.Drug.type }
+
+Rule:doseChange1
+(
+	{Keyword.kind == "prescription_change"}
+	{Drug}
+	({Token.string == "from"}|{Token.string == "to"})?
+	({Measurement.dimension!=time}({DoseFrequency})?)	
+):match
+-->
+:match.Prescription = { rule = doseChange1, drug = :match.Drug.name, dose = :match.Measurement@string, dose-value = :match.Measurement.value, dose-unit = :match.Measurement.unit, status = :match.Keyword.type, route = :match.Drug.route, frequency = :match.DoseFrequency.frequency, time-unit = :match.DoseFrequency.time-unit, interval = :match.DoseFrequency.interval, when = :match.DoseFrequency.when, drug-type = :match.Drug.type }
+
+Rule:doseChange2
+(
+	{Drug}
+	{Keyword.kind == "prescription_change"}
+)
+:match
+-->
+:match.Prescription = { rule = doseChange2, drug = :match.Drug.name, status = :match.Keyword.type, route = :match.Drug.route, drug-type = :match.Drug.type }
+
+Rule:doseChange3
+(
+	{Keyword.kind == "prescription_change"}
+	{Drug}
+)
+:match
+-->
+:match.Prescription = { rule = doseChange2, drug = :match.Drug.name, status = :match.Keyword.type, route = :match.Drug.route, drug-type = :match.Drug.type }
+
+Rule:drugFrequency
+(
+	{Drug}
+	{DoseFrequency}
+):match
+-->
+:match.Prescription = { rule = drugFrequency, drug = :match.Drug.name, route = :match.Drug.route, frequency = :match.DoseFrequency.frequency, time-unit = :match.DoseFrequency.time-unit, interval = :match.DoseFrequency.interval, when = :match.DoseFrequency.when, drug-type = :match.Drug.type }

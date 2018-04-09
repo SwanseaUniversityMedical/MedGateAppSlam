@@ -1,0 +1,14 @@
+
+
+Phase: firstPhase
+Input: Prescription 
+Options: control=all
+
+
+//depending on what you define as "recent" vs "historical"
+Rule: copyPrescriptionsToCoreConcept
+(
+{Prescription}
+):match
+-->
+:match.CoreConcept = {}

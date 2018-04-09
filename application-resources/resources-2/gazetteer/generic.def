@@ -1,0 +1,13 @@
+start.lst:status:start
+stop.lst:status:stop
+current.lst:status:continuing
+historic.lst:historic
+family-members.lst:family
+frequency.lst:frequency
+routes-oral.lst:route:oral
+routes-im.lst:route:im
+routes-iv.lst:route:iv
+routes-rectal.lst:route:rectal
+routes-sc.lst:route:sc
+routes-dermal.lst:route:dermal
+indicator.lst:indicator

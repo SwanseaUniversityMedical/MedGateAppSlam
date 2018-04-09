@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<schema xmlns="http://www.w3.org/2000/10/XMLSchema">
+	<element name="Prescription">
+		<complexType>			
+			<attribute name="Directionality" use="optional" type="string"/>
+	        <attribute name="Experiencer" use="optional" type="string"/>
+			<attribute name="Temporality" use="optional" type="string"/>
+			<attribute name="Length of Time" use="optional" type="string"/>
+		    <attribute name="Unit of Time" use="optional" type="string"/>
+			
+			<attribute name="drug" use="required" type="string"/>
+			<attribute name="drug-type" use="required" type="string" value="other"/>
+
+			<attribute name="status" use="required" value="continuing">
+				<simpleType>
+				    <restriction base="string">
+					<enumeration value="start"/>
+					<enumeration value="continuing"/>
+					<enumeration value="stop"/>
+				    </restriction>
+				</simpleType>	 
+			</attribute>
+
+			<attribute name="tense" use="required" value="present">
+				<simpleType>
+				    <restriction base="string">
+					<enumeration value="past"/>
+					<enumeration value="present"/>
+				    </restriction>
+				</simpleType>
+			</attribute>
+
+			<attribute name="dose" use="required" type="string" value="unknown"/>
+			<attribute name="dose-value" use="required" type="double" value="-1"/>
+			<attribute name="dose-unit" use="required" type="string" value="unknown"/>
+			<attribute name="dose-multiple" use="required" type="integer" value="1"/>
+
+			<attribute name="frequency" type="double"/>	
+			<attribute name="time-unit" type="string"/>
+			<attribute name="interval" type="double"/>
+			<attribute name="when" use="optional" type="string"/>
+
+			<attribute name="date" use="optional" type="string"/>
+
+			<attribute name="route" use="required" value="unknown">
+				<simpleType>
+				    <restriction base="string">
+					<enumeration value="oral"/>
+					<enumeration value="im"/>
+					<enumeration value="iv"/>
+					<enumeration value="rectal"/>
+					<enumeration value="sc"/>
+					<enumeration value="dermal"/>
+					<enumeration value="unknown"/>
+				    </restriction>
+				</simpleType>	 
+			</attribute>
+
+      		</complexType>
+      	</element>
+</schema>
