@@ -1,0 +1,8 @@
+{
+  "Name": "Slam",
+  "Author": "Arron",
+  "Type": "gate",
+  "Version": 1.0,
+  "Env_version": 8.5,
+  "Annotations": [{ "Name": "Output", "Value": ["Prescription"] }]
+}
